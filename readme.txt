@@ -57,8 +57,12 @@ Yes! There are currently 3 supported themes, check out the screenshots page to s
 3. blue theme
 4. base theme
 5. flick theme
+6. trontastic theme
 
 == Changelog ==
+
+= 1.0.4 =
+* Added 'trontastic' theme for darker websites
 
 = 1.0.3 =
 * Used WordPress jQuery UI scripts
@@ -75,6 +79,9 @@ Yes! There are currently 3 supported themes, check out the screenshots page to s
 * Created plugin with dialog functionality.
 
 == Upgrade Notice ==
+
+= 1.0.4 =
+New theme available
 
 = 1.0.3 = 
 Use WordPress scripts

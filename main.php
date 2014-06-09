@@ -4,7 +4,7 @@
 Plugin Name: PJ jQuery UI Helper
 Plugin URI: http://pjokumsen.co.za/wordpress/plugins/pj-jquery-ui-helper/
 Description: Plugin to use jQuery UI in WordPress.
-Version: 1.0.3
+Version: 1.0.4
 Author: Peter Jokumsen
 Author URI: http://pjokumsen.co.za/
 */
@@ -73,7 +73,7 @@ class PJJUH_Main extends PJ_Plugin {
   
   public $plugin_path;
   public $plugin_url;
-  public $plugin_version = '1.0.3';
+  public $plugin_version = '1.0.4';
   public $plugin_slug = 'pj-jquery-ui-helper';
   
   
