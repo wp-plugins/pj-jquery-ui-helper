@@ -69,4 +69,3 @@ class PJJUH_Shortcodes_Tabs_Model extends PJ_Model {
     return $this->tabs_data;
   }
 }
-

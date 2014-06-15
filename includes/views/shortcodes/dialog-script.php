@@ -1,10 +1,10 @@
 <?php
 
 //included with $dialogs variable initialised.
-$return_string = '(function($) {';
+$return_string = '';
 foreach ($dialogs as $dialog) {
-  $return_string .= 
-    '$("#'. $dialog['dialog_id'] .'").dialog({
+  $return_string .= '
+    $("#'. $dialog['dialog_id'] .'").dialog({
         autoOpen: false,
         height:'. $dialog['height'] .',
         width:'. $dialog['width'] .',
@@ -21,5 +21,4 @@ foreach ($dialogs as $dialog) {
           return false;
         });';  
 }
-$return_string .= '})(jQuery);';
 return $return_string;

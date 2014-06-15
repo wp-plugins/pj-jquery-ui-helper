@@ -1,11 +1,5 @@
 <?php
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 if ( !function_exists( 'add_action' ) ) {
 	echo 'Hi there!  I\'m just a plugin, not much I can do when called directly.';
 	exit;
@@ -19,9 +13,13 @@ require_once $pjjuh_plugin_dir . 'views/shortcodes/shortcodes-dialog-main-view.p
 require_once $pjjuh_plugin_dir . 'models/shortcodes-tabs-model.php';
 require_once $pjjuh_plugin_dir . 'views/shortcodes/shortcodes-tabs-main-view.php';
 
+/** Include model and view classes for accordion shortcodes */
+require_once $pjjuh_plugin_dir . 'models/shortcodes-accordion-model.php';
+require_once $pjjuh_plugin_dir . 'views/shortcodes/shortcodes-accordion-main-view.php';
+
 class PJJUH_Shortcodes_Controller extends PJ_Controller {
   private $models, $views;
-  private $current_tab_group;
+  private $current_tab_group, $current_accordion;
   
   public function __construct() {
     add_action('wp_print_footer_scripts', array($this, 'create_pjjuh_script'));
@@ -79,17 +77,61 @@ class PJJUH_Shortcodes_Controller extends PJ_Controller {
     $this->models['tabs']->initialize_individual_tab_data($current_group_id, $atts, $content);
   }
   
+  /* ACCORDION FUNCTIONS */
+  public function create_accordion($atts, $content) {
+    if (!isset($this->models['accordion'])) {
+      $this->models['accordion'] = new PJJUH_Shortcodes_Accordion_Model();
+    }
+    if (!isset($this->views['accordion'])) {
+      $this->views['accordion'] = new PJJUH_Shortcodes_Accordion_View();
+    }
+    $current_model = $this->models['accordion'];
+    $current_view = $this->views['accordion'];
+    $this->current_accordion[] = $current_model->initialize_accordion_data($atts);
+    do_shortcode($content);
+    if (count($this->current_accordion)>1) {
+      $current_accordion_id = array_pop($this->current_accordion);
+      $this->current_accordion[] = $current_accordion_id;      
+    } else {
+      $current_accordion_id = $this->current_accordion[0];
+    }
+    $rendered_accordion = $current_view->render_accordion($current_model->get_accordion_data($current_accordion_id));
+    array_pop($this->current_accordion);
+    return $rendered_accordion;
+  }
+  
+  public function add_section($atts, $content) {
+    if (!isset($this->current_accordion)) {
+      return 'Unable to add tabs without a tab group, use [pjjuh-tab-group][/pjjuh-tab-group]';
+    }
+    if (count($this->current_accordion)>1) {
+      //return 'Unable to handle nested Tab groups just yet';
+      //proposed solution to nesting:
+      $current_accordion_id = array_pop($this->current_accordion);
+      $this->current_accordion[] = $current_accordion_id;
+    } else {
+      $current_accordion_id = $this->current_accordion[0];
+    }
+    $this->models['accordion']->initialize_individual_section_data($current_accordion_id, $atts, $content);
+  }  
+  
   /* SCRIPT FUNCTION */
   public function create_pjjuh_script() {
     $scripts = '';
+    if (isset($this->views['accordion']) && isset($this->models['accordion'])) {
+      $scripts .= $this->views['accordion']->render_script($this->models['accordion']->get_all_accordions());
+    }
     if (isset($this->views['tabs']) && isset($this->models['tabs'])) {
-     $scripts = $this->views['tabs']->render_script($this->models['tabs']->get_all_tabs());
+     $scripts .= $this->views['tabs']->render_script($this->models['tabs']->get_all_tabs());
     }
     if (isset($this->views['dialog']) && isset($this->models['dialog'])) {
       $scripts .= $this->views['dialog']->render_script($this->models['dialog']->get_all_dialogs());
     }
     if ($scripts != '') {
-      echo '<script>'.$scripts.'</script>';
+      echo '<script>'
+      . '(function($) {'
+      . $scripts . 
+      '})(jQuery);</script>';
     }
   }
   /* END DIALOG FUNCTIONS */

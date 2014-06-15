@@ -1,21 +1,16 @@
 <?php
 
-/* 
- * Array $current_data set in function that includes this php file, with following items in array
- * 'dialog_id' - id of the dialog to be used
- * 'page' - Page object to be used
- * 'button_id' - id for button used
- * 'button_title' - text to be displayed on button
- * 'width' - width of dialog
- * 'height' - height of dialog
- * 'modal' - true/false
+/*
+ * Variables used are declared in the function including this file
+ * $group_id = the id of the group being created
+ * $tabs = an array of tabs to be displayed with the following keys
+ *        ['id']      - ID of the tab
+ *        ['title']   - title of the tab (what the user will see)
+ *        ['content'] - the content that will be inside of the tab
+ * 
+ * returns the return_string for use later in plugin
  */
-    /*
-     * to be added:
-     * page_post_title - dialog_title
-       page_post_content - dialog_content
-       page_guid - dialog_other_href
-     */
+
 $return_string = 
   '<div id="'. $group_id .'">
     <ul>';
