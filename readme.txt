@@ -65,6 +65,9 @@ Examples of themes
 
 == Changelog ==
 
+= 1.0.6 =
+* Applied font sizing to Tabs section
+
 = 1.0.5 =
 * Included accordion functionality
 
