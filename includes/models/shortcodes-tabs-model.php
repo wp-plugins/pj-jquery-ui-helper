@@ -11,11 +11,15 @@ class PJJUH_Shortcodes_Tabs_Model extends PJ_Model {
   
   public function __construct() {
     $this->tabs_group_defaults = array(
-        'id'=>'pjjuh_tabs_'
+        'id'=>'pjjuh_tabs_',
+        'title_font_size'=>'',
+        'section_font_size'=>''
     );
     $this->tab_defaults = array(
         'id'=>'pjjuh_tabs_child_',
-        'title'=>''
+        'title'=>'',
+        'title_font_size'=>'',
+        'section_font_size'=>''
     );
     $this->group_id_iterator = 1;
     $this->tab_id_iterator = 1;
@@ -37,6 +41,9 @@ class PJJUH_Shortcodes_Tabs_Model extends PJ_Model {
     } else {
       $temp_group['id'] = $atts['id'];
     }
+    $temp_group['title_font_size'] = $atts['title_font_size'];
+    $temp_group['section_font_size'] = $atts['section_font_size'];
+    
     $this->tabs_data[$temp_group['id']] = $temp_group;
 
     return $temp_group['id'];
@@ -57,6 +64,13 @@ class PJJUH_Shortcodes_Tabs_Model extends PJ_Model {
     }
     $temp_tab['title'] = $atts['title'];
     $temp_tab['content'] = do_shortcode($content);
+    
+    $current_tab_group = $this->tabs_data[$group_id];
+    
+    $temp_tab['title_font_size'] = ($atts['title_font_size']=='' ? $current_tab_group['title_font_size'] : $atts['title_font_size']);
+    $temp_tab['section_font_size'] = ($atts['section_font_size']=='' ? $current_tab_group['section_font_size'] : $atts['section_font_size']);
+
+    
     
     $this->tabs_data[$group_id]['tabs'][$temp_tab['id']] = $temp_tab;
   }
