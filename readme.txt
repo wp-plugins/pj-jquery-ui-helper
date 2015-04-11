@@ -65,6 +65,9 @@ Examples of themes
 
 == Changelog ==
 
+= 1.0.7 =
+* Implemented heightStyle option for Accordions as height_style parameter in \[pjjuh-accordion\] shortcode. Defaults to "auto" if not used.
+
 = 1.0.6 =
 * Applied font sizing to Tabs section
 

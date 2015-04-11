@@ -12,7 +12,7 @@ $return_string = '
         '}';
 foreach ($accordions as $accordion) {
   $return_string .= '
-          $("#'. $accordion['id'] .'").accordion({'.
+          $("#'. $accordion['id'] .'").accordion({'.'heightStyle:"'.$accordion['height_style'].'",'.
             'beforeActivate: function( event, ui ) {'.
              'newHeadOffset = ui.newHeader[0].offsetTop;'.
               'oldHeadOffset = ui.oldHeader[0].offsetTop;'.

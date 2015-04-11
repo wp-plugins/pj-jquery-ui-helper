@@ -13,7 +13,8 @@ class PJJUH_Shortcodes_Accordion_Model extends PJ_Model {
     $this->accordion_defaults = array(
         'id'=>'pjjuh_accordion_',
         'title_font_size'=>'',
-        'section_font_size'=>''
+        'section_font_size'=>'',
+        'height_style'=>'auto',
     );
     $this->section_defaults = array(
         'id'=>'pjjuh_section_',
@@ -43,6 +44,10 @@ class PJJUH_Shortcodes_Accordion_Model extends PJ_Model {
     }
     $temp_accordion['title_font_size'] = $atts['title_font_size'];
     $temp_accordion['section_font_size'] = $atts['title_font_size'];
+    if ($atts['height_style'] != 'auto' && $atts['height_style'] != 'content' && $atts['height_style'] != 'fill') {
+      $atts['height_style'] = 'auto';
+    }
+    $temp_accordion['height_style'] = $atts['height_style'];
     $this->accordion_data[$temp_accordion['id']] = $temp_accordion;
 
     return $temp_accordion['id'];
