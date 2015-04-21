@@ -3,7 +3,7 @@ Contributors: pjokumsen
 Donate Link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=T4KCYGJYRJHS4
 Tags: jquery ui, dialog, tabs
 Requires at least: 3.8.1
-Tested up to: 4.1
+Tested up to: 4.2
 Stable tag: trunk
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -64,6 +64,9 @@ Examples of themes
 7. trontastic theme
 
 == Changelog ==
+
+= 1.0.8 =
+* Updated themes to 1.11.4
 
 = 1.0.7 =
 * Implemented heightStyle option for Accordions as height_style parameter in \[pjjuh-accordion\] shortcode. Defaults to "auto" if not used.
